@@ -1,0 +1,88 @@
+﻿@model TallinnaRakenduslikKolledz.Models.Course
+@ViewBag.viewtype
+
+@if (ViewBag.viewtype == "Delete")
+{
+	
+	ViewData["Title"] = "Kustuta kursus";
+    
+	<h1>Kustuta @Html.DisplayFor(model => Model.Title)</h1>
+	<h3>Oled kindel</h3>
+
+	<div>
+		<h4>Kursus</h4>
+		<hr />
+		<dl class="row">
+
+			<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.CourseId)</dt>
+			<dd class="col-sm-10">@Html.DisplayFor(Model => Model.CourseId)</dd>
+
+			<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.Title)</dt>
+			<dd class="col-sm-10">@Html.DisplayFor(Model => Model.Title)</dd>
+
+			<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.DepartmentID)</dt>
+			<dd class="col-sm-10">@Html.DisplayFor(Model => Model.DepartmentID)</dd>
+
+			<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.Department)</dt>
+			<dd class="col-sm-10">@Html.DisplayFor(Model => Model.Department)</dd>
+
+			<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.Enrollments)</dt>
+			<dd class="col-sm-10">@Html.DisplayFor(Model => Model.Enrollments)</dd>
+
+			<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.courseAssignments)</dt>
+			<dd class="col-sm-10">@Html.DisplayFor(Model => Model.courseAssignments)</dd>
+
+		</dl>
+
+		
+	</div>
+
+	<form asp-action="Delete">
+		<input type="hidden" asp-for="CourseId" />
+		<input type="submit" value="Kustuta" class="btn btn-danger" /> | <a asp-action="Index">Tühista</a>
+	</form>
+}
+else if(ViewBag.viewtype == "Details")
+{
+	
+	ViewData["Title"] = "Kustuta kursus";
+     
+	
+	
+	<div>
+		<h4>Kursus details</h4>
+		<hr />
+		<dl class="row">
+
+		<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.CourseId)</dt>
+		<dd class="col-sm-10">@Html.DisplayFor(Model => Model.CourseId)</dd>
+
+		<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.Title)</dt>
+		<dd class="col-sm-10">@Html.DisplayFor(Model => Model.Title)</dd>
+
+		<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.DepartmentID)</dt>
+		<dd class="col-sm-10">@Html.DisplayFor(Model => Model.DepartmentID)</dd>
+
+		<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.Department)</dt>
+		<dd class="col-sm-10">@Html.DisplayFor(Model => Model.Department)</dd>
+
+		<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.Enrollments)</dt>
+		<dd class="col-sm-10">@Html.DisplayFor(Model => Model.Enrollments)</dd>
+
+		<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.courseAssignments)</dt>
+		<dd class="col-sm-10">@Html.DisplayFor(Model => Model.courseAssignments)</dd>
+
+			
+
+		</dl>
+
+		
+		
+
+		
+	</div>
+<a asp-action="Index">Tühista</a>
+}
+
+	
+

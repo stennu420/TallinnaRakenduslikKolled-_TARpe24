@@ -1,0 +1,90 @@
+﻿@model TallinnaRakenduslikKolledz.Models.Student
+
+@{
+	ViewData["Title"] = "Õpilaste andmed";
+
+}
+
+<h3>
+	Õpilase @Model.FirstName @Model.LastName andmed
+
+</h3>
+<div>
+	<h4>Õpilane @Model.FirstName @Model.LastName</h4>
+	<hr />
+	<dl class="row">
+
+		<dt class="Col-sm-2">@Html.DisplayNameFor(Model => Model.LastName)</dt>
+		<dd class="Col-sm-10">@Html.DisplayFor(Model => Model.LastName)</dd>
+	</dl>
+	<dl class="row">
+
+		<dt class="Col-sm-2">@Html.DisplayNameFor(Model => Model.Id)</dt>
+		<dd class="Col-sm-10">@Html.DisplayFor(Model => Model.Id)</dd>
+	</dl>
+
+	<dl class="row">
+
+
+		<dt class="Col-sm-2">@Html.DisplayNameFor(Model => Model.FirstName)</dt>
+		<dd class="Col-sm-10">@Html.DisplayFor(Model => Model.FirstName)</dd>
+	</dl>
+
+	<dl class="row">
+
+		<dt class="Col-sm-2">@Html.DisplayNameFor(Model => Model.EnrollmentDate)</dt>
+		<dd class="Col-sm-10">@Html.DisplayFor(Model => Model.EnrollmentDate)</dd>
+	</dl>
+	@* if on null: kuva tekst andmeid pole
+		else: kuvab andmed
+	*@
+	<dl class="row">
+
+	<dt class="Col-sm-2">@Html.DisplayNameFor(Model => Model.HomeAddress)</dt>
+	@if (Model.HomeAddress == null)
+	{
+		@("No data");
+	}
+	else
+	{
+			<dd class="Col-sm-10">@Html.DisplayFor(Model => Model.HomeAddress)</dd>
+	}
+		</dl>
+
+	
+	@if (Model.Email == null)
+	{
+
+	}
+	else
+	{
+		<dl class="row">
+
+			<dt class="Col-sm-2">@Html.DisplayNameFor(Model => Model.Email)</dt>
+			<dd class="Col-sm-10">@Html.DisplayFor(Model => Model.Email)</dd>
+		</dl>
+	}
+	@if (Model.Age == null)
+	{
+
+	}
+	else
+	{
+		<dl class="row">
+
+			<dt class="Col-sm-2">@Html.DisplayNameFor(Model => Model.Age)</dt>
+			<dd class="Col-sm-10">@Html.DisplayFor(Model => Model.Age)</dd>
+		</dl>
+
+	}
+
+	
+	
+	
+	
+	
+
+	
+
+		
+</div>

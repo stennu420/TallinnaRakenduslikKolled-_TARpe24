@@ -1,0 +1,34 @@
+﻿@model TallinnaRakenduslikKolledz.Models.Instructor
+@{
+    ViewData["Title"] = "Kustuta õpetaja";
+}
+<h1>Kustuta Õpetaja</h1>
+<h3>Kas soovid kustutada @Html.DisplayFor(Model => Model.FullName)</h3>
+<div>
+    <h4>Õpetaja</h4>
+    <hr/>
+    <dl class="row">
+        <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.LastName)</dt>
+        <dt class="col-sm-2">@Html.DisplayFor(Model => Model.LastName)</dt>
+        <dt class="col-sm-2">@Html.DisplayFor(Model => Model.FirstName)</dt>
+        <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.FirstName)</dt>
+        <dt class="col-sm-2">@Html.DisplayFor(Model => Model.HireDate)</dt>
+        <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.HireDate)</dt>
+        <dt class="col-sm-2">@Html.DisplayFor(Model => Model.CourseAssignments)</dt>
+        <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.CourseAssignments)</dt>
+        <dt class="col-sm-2">@Html.DisplayFor(Model => Model.HomeAddress)</dt>
+        <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.HomeAddress)</dt>
+        <dt class="col-sm-2">@Html.DisplayFor(Model => Model.Age)</dt>
+        <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.Age)</dt>
+        <dt class="col-sm-2">@Html.DisplayFor(Model => Model.OfficeAssignment)</dt>
+        <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.OfficeAssignment)</dt>
+       
+        
+       
+    </dl>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for"ID"/>
+        <input type="submit" value="Kustuta" class="btn btn-danger" />|<a asp-action="Index">Tühista</a>
+
+    </form>
+</div>

@@ -1,4 +1,4 @@
-namespace TallinnaRakenduslikKolledž.Models
+namespace TallinnaRakenduslikKolledz.Models
 {
     public class ErrorViewModel
     {

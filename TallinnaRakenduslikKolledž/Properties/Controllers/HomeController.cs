@@ -1,8 +1,8 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using TallinnaRakenduslikKolled≈æ.Models;
+using TallinnaRakenduslikKolledz.Models;
 
-namespace TallinnaRakenduslikKolled≈æ.Controllers
+namespace TallinnaRakenduslikKolledz.Controllers
 {
     public class HomeController : Controller
     {
@@ -20,8 +20,30 @@ namespace TallinnaRakenduslikKolled≈æ.Controllers
 
         public IActionResult Privacy()
         {
+            ViewData["V‰rv"] = "Details";
             return View();
+
+            
         }
+        public IActionResult Privacy2()
+        {
+            ViewData["V‰rv"] = "Delete";
+            return View("Privacy");
+        }
+        public IActionResult Privacy3()
+        {
+            ViewData["V‰rv2"] = "Edit";
+            return View();
+
+            
+        }public IActionResult Privacy4()
+        {
+            ViewData["V‰rv2"] = "Create";
+            return View();
+
+            
+        }
+        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
