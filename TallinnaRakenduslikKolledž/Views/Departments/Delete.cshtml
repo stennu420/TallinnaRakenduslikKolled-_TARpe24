@@ -1,10 +1,11 @@
-﻿@model TallinnaRakenduslikKolledz.Models.Department
+﻿@model TallinnaRakenduslikKolledz.Models.Instructor
 
 
-@{ ViewData["Title"] = "kustuta osakond";
+@{ 
+    ViewData["Title"] = "kustuta osakond";
 }
-
-<h2>@Html.DisplayFor(modelItem => Model.Name)</h2>
+@if (ViewBag.Delete == "Delete") {
+<h2>@Html.DisplayFor(ModelItem => Model.Name)</h2>
 <p>
     <h3>Kustuta osakond:</h3>
 </p>
@@ -44,8 +45,35 @@
     }
     else if(ViewBag.viewtype =="Details")
     {
-        <a asp-action="Index">Tühista</a>
+        <hl>Vaata Osakonda</hl>
+        <div>
+	        <hr />
+             <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.Name)</dt>
+            <dt class="col-sm-2">@Html.DisplayFor(Model => Model.Name)</dt>
+            <dt class="col-sm-2">@Html.DisplayFor(Model => Model.DepartmentID)</dt>
+            <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.DepartmentID)</dt>
+            <dt class="col-sm-2">@Html.DisplayFor(Model => Model.InstructorID)</dt>
+            <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.InstructorID)</dt>
+            <dt class="col-sm-2">@Html.DisplayFor(Model => Model.Budget)</dt>
+            <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.Budget)</dt>
+            <dt class="col-sm-2">@Html.DisplayFor(Model => Model.StartDate)</dt>
+            <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.StartDate)</dt>
+            <dt class="col-sm-2">@Html.DisplayFor(Model => Model.Adminstrator)</dt>
+            <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.Adminstrator)</dt>
+            <dt class="col-sm-2">@Html.DisplayFor(Model => Model.EndDate)</dt>
+            <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.EndDate)</dt>
+            <dt class="col-sm-2">@Html.DisplayFor(Model => Model.WaterStations)</dt>
+            <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.WaterStations)</dt>
+            <dt class="col-sm-2">@Html.DisplayFor(Model => Model.SteamAccountName)</dt>
+            <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.SteamAccountName)</dt>
 
+
+            <form>
+	            <a asp-action="Index">Tagasi Osakondade Loetellu</a>
+            </form>
+
+
+        </div>
     }
 
 </div>
