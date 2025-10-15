@@ -2,91 +2,30 @@
 
 @{
 	ViewData["Title"] = "Õpetaja andmed";
-
 }
-
-<h3>
-	õpetaja @Model.FirstName @Model.LastName andmed
-
-</h3>
+<h1>Õpetaja andmed</h1>
+<h2>@Html.DisplayFor(ModelItem => Model.FullName)</h2>
 <div>
-	<h4>Õpetaja @Model.FirstName @Model.LastName</h4>
-	<hr />
+	<h4>Õpetaja</h4>
+	<hr/>
 	<dl class="row">
-
-		<dt class="Col-sm-2">@Html.DisplayNameFor(Model => Model.LastName)</dt>
-		<dd class="Col-sm-10">@Html.DisplayFor(Model => Model.LastName)</dd>
+		<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.LastName)</dt>
+		<dt class="col-sm-2">@Html.DisplayFor(Model => Model.LastName)</dt>
+		<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.FirstName)</dt>
+		<dt class="col-sm-2">@Html.DisplayFor(Model => Model.FirstName)</dt>
+		<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.HireDate)</dt>
+		<dt class="col-sm-2">@Html.DisplayFor(Model => Model.HireDate)</dt>
+		<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.OfficeAssignment)</dt>
+		<dt class="col-sm-2">@Html.DisplayFor(Model => Model.OfficeAssignment)</dt>
+		<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.Salary)</dt>
+		<dt class="col-sm-2">@Html.DisplayFor(Model => Model.Salary)</dt>
+		<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.Gender)</dt>
+		<dt class="col-sm-2">@Html.DisplayFor(Model => Model.Gender)</dt>
+		<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.Age)</dt>
+		<dt class="col-sm-2">@Html.DisplayFor(Model => Model.Age)</dt>
 	</dl>
-	<dl class="row">
-
-		<dt class="Col-sm-2">@Html.DisplayNameFor(Model => Model.Id)</dt>
-		<dd class="Col-sm-10">@Html.DisplayFor(Model => Model.Id)</dd>
-	</dl>
-
-	<dl class="row">
-
-
-		<dt class="Col-sm-2">@Html.DisplayNameFor(Model => Model.FirstName)</dt>
-		<dd class="Col-sm-10">@Html.DisplayFor(Model => Model.FirstName)</dd>
-	</dl>
-
-	<dl class="row">
-
-		<dt class="Col-sm-2">@Html.DisplayNameFor(Model => Model.HireDate)</dt>
-		<dd class="Col-sm-10">@Html.DisplayFor(Model => Model.HireDate)</dd>
-	</dl>
-	@* if on null: kuva tekst andmeid pole
-		else: kuvab andmed
-	*@
-	<dl class="row">
-
-		<dt class="Col-sm-2">@Html.DisplayNameFor(Model => Model.HomeAddress)</dt>
-		@if (Model.HomeAddress == null)
-		{
-			@("No data")
-			;
-		}
-		else
-		{
-			<dd class="Col-sm-10">@Html.DisplayFor(Model => Model.HomeAddress)</dd>
-		}
-	</dl>
-
-
-	@if (Model.Email == null)
-	{
-
-	}
-	else
-	{
-		<dl class="row">
-
-			<dt class="Col-sm-2">@Html.DisplayNameFor(Model => Model.Email)</dt>
-			<dd class="Col-sm-10">@Html.DisplayFor(Model => Model.Email)</dd>
-		</dl>
-	}
-	@if (Model.Age == null)
-	{
-
-	}
-	else
-	{
-		<dl class="row">
-
-			<dt class="Col-sm-2">@Html.DisplayNameFor(Model => Model.Age)</dt>
-			<dd class="Col-sm-10">@Html.DisplayFor(Model => Model.Age)</dd>
-		</dl>
-
-	}
-	
-
-
-
-
-
-
-
-
-
-
+	<form>
+		<input type="hidden" asp-for="ID" />
+		<a asp-action="Index">Tagasi õpetajate loetellu</a>
+	</form>
 </div>
