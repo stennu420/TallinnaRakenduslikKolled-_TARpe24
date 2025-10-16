@@ -81,6 +81,11 @@ else
 			}
 			else if(ViewBag.viewtype == "Edit")
 			{
+			<h2>Asuta uus osakond</h2>
+			<hr />
+			<div class="row"></div>
+			<div class="col-md-4"></div>
+						
 
 			<form asp-action="Edit">
 				<input type="hidden" asp-for="DepartmentID" />
@@ -144,13 +149,20 @@ else
 					<input type="submit" value="Edit" class="btn btn-green" /> | <a asp-action="Index"
 																		  class="btn btn-primary"></a>
 				</div>
+
+
+
 			</form>
+			
+			
+		<div>
+			<a asp-action="Index">Mine tagasi </a>
+		</div>
 			}
 
 			
 	 
 
 
-	</div>In
+	</div>
 
-</div>
