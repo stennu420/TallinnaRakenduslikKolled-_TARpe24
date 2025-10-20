@@ -6,7 +6,7 @@ using TallinnaRakenduslikKolledz.Models;
 
 namespace TallinnaRakenduslikKolledz.Controllers
 {
-    public class StudentsController : Controller
+       public class StudentsController : Controller
     {
         private readonly SchoolContext _context;
         public StudentsController(SchoolContext context)
@@ -22,33 +22,28 @@ namespace TallinnaRakenduslikKolledz.Controllers
         {
             return View();
         }
-        /// <summary>
-        /// POST student to database
-        /// </summary>
-        /// <param name="student"> object of studendt </param>
-        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind
-        ("ID, LastName, FirstName, EnrollmentDate,HomeAddress,Age,Email")] Student student)
+
+            ("Id,LastName, FirstName,  EnrollmentDate, GradesPerAverage")] Student student)
+
         {
             if (ModelState.IsValid)
             {
-
                 _context.Students.Add(student);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
-                //return RedirectToAction(nameof("Index"));
-
             }
             return View(student);
         }
-
         /**/
+
+
         /// <summary>
-        /// Get delete view for student
+        /// get delete view for student
         /// </summary>
-        /// <param name="id">id of student</param>
+        /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Delete(int? id)
@@ -64,11 +59,6 @@ namespace TallinnaRakenduslikKolledz.Controllers
             }
             return View(student);
         }
-        /// <summary>
-        /// Confirms student deletion
-        /// </summary>
-        /// <param name="id"> id of student</param>
-        /// <returns></returns>
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -80,21 +70,22 @@ namespace TallinnaRakenduslikKolledz.Controllers
             return RedirectToAction("Index");
         }
         [HttpGet]
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
             var student = await _context.Students.FindAsync(id);
             return View(student);
         }
         [HttpGet]
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit (int id)
         {
             var student = await _context.Students.FindAsync(id);
-                return View(student);
+            return View(student);
         }
         [HttpPost, ActionName("Edit")]
-        public async Task<IActionResult> EditConfirmed([Bind("Id, LastName,FirstName ,EnrollmentDate")] Student student)
+        public async Task<IActionResult> Edit([Bind("Id,LastName, FirstName,  EnrollmentDate, GradesPerAverage")] Student student)
+
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _context.Students.Update(student);
                 await _context.SaveChangesAsync();
@@ -102,7 +93,5 @@ namespace TallinnaRakenduslikKolledz.Controllers
             }
             return View(student);
         }
-        
-
     }
 }
