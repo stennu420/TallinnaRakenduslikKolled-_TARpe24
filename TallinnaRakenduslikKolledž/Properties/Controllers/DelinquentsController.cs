@@ -5,7 +5,7 @@ using TallinnaRakenduslikKolledz.Data;
 using TallinnaRakenduslikKolledz.Models;
 
 
-namespace TRK_TARpe24EN.Controllers
+namespace TallinnaRakenduslikKolledz.Controllers
 {
     public class InstructorsController : Controller
     {
