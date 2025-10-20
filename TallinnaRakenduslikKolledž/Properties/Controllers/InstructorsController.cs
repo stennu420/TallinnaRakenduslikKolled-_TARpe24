@@ -6,54 +6,33 @@ using TallinnaRakenduslikKolledz.Models;
 
 namespace TallinnaRakenduslikKolledz.Controllers
 {
-    public class InstructorsController : Controller
+        public class InstructorsController : Controller
     {
         private readonly SchoolContext _context;
         public InstructorsController(SchoolContext context)
         {
             _context = context;
         }
-        public async Task<IActionResult> Index(int? id, int? courseId)
+        public async Task<IActionResult> Index( int? id, int? courseId)
         {
             var vm = new InstructorIndexData();
             vm.Instructors = await _context.Instructors
-            .Include(i => i.OfficeAssignment)
-            .Include(i => i.CourseAssignments)
-            .ToListAsync();
+                .Include(i => i.OfficeAssignment)
+                .Include(i => i.CourseAssignments)
+                .ToListAsync();
             return View(vm);
 
         }
-        [HttpGet]
-        [HttpGet]
-        public async Task<IActionResult> Details(int? id)
-        {
-            var teacher = await _context.Instructors.FindAsync(id);
-            return View(teacher);
-        }
-        [HttpGet]
-        public async Task<IActionResult> Edit(int id)
-        {
-            var teacher = await _context.Instructors.FindAsync(id);
-            return View(teacher);
-        }
-        [HttpPost, ActionName("Edit")]
-        public async Task<IActionResult> EditConfirmed([Bind("Id, LastName,FirstName,Email,HireDate,HomeAddress,Age")] Instructor teacher)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Instructors.Update(teacher);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            return View(teacher);
-        }
+
         [HttpGet]
         public IActionResult Create()
         {
             var instructor = new Instructor();
             instructor.CourseAssignments = new List<CourseAssignment>();
             return View();
+
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Instructor instructor, string selectedCourses)
@@ -65,67 +44,90 @@ namespace TallinnaRakenduslikKolledz.Controllers
                 {
                     var courseToAdd = new CourseAssignment
                     {
-                        InstructorId = instructor.Id,
+                        InstructorID = instructor.ID,
                         CourseID = course
-
                     };
                     instructor.CourseAssignments.Add(courseToAdd);
                 }
             }
             ModelState.Remove("selectedCourses");
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _context.Add(instructor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
-
             }
             //PopulateAssignedCourseData(instructor);
             return View(instructor);
         }
+
         [HttpGet]
         public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
         {
-            if(id == null)
+            if (id == null)
             {
                 return NotFound();
             }
             var deletableInstructor = await _context.Instructors
-                .FirstOrDefaultAsync(s => s.Id == id);
+                .FirstOrDefaultAsync(s => s.ID == id);
             if (deletableInstructor == null)
             {
                 return NotFound();
             }
             return View(deletableInstructor);
         }
-        [HttpPost,ActionName("Delete")]
+
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            Instructor deletableinstructor = await _context.Instructors
-                .SingleAsync(i => i.Id == id);
-            _context.Instructors.Remove(deletableinstructor);
+            Instructor deletableInstructor = await _context.Instructors
+                .SingleAsync(i => i.ID == id);
+            _context.Instructors.Remove(deletableInstructor);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+        [HttpGet]
+        public async Task<IActionResult> Details(int? id)
+        {
+            var instructor = await _context.Instructors.FirstOrDefaultAsync(i => i.ID == id);
+            return View(instructor);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            var instructor = await _context.Instructors.FindAsync(id);
+            return View(instructor);
+        }
+        [HttpPost, ActionName("Edit")]
+        public async Task<IActionResult> Edit([Bind("ID, LastName, FirstName, Salary, Gender, Age, HireDate")] Instructor instructor)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Instructors.Update(instructor);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
 
         private void PopulateAssignedCourseData(Instructor instructor)
         {
-            var allcourses = _context.Courses;
+            var allCourses = _context.Courses; // leiame koik kursused
             var instructorCourses = new HashSet<int>(instructor.CourseAssignments.Select(c => c.CourseID));
+            // valime kursused kus courseid on õpetajal olemas
             var vm = new List<AssignedCourseData>();
-            foreach (var course in allcourses)
+            foreach (var course in allCourses)
             {
                 vm.Add(new AssignedCourseData
                 {
-                    CourseID = course.CourseId,
+                    CourseID = course.CourseID,
                     Title = course.Title,
-                    Assigned = instructorCourses.Contains(course.CourseId)
-
+                    Assigned = instructorCourses.Contains(course.CourseID)
                 });
             }
             ViewData["Courses"] = vm;
-
         }
     }
 }
