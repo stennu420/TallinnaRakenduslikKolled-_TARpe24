@@ -1,79 +1,81 @@
 ﻿@model TallinnaRakenduslikKolledz.Models.Department
 
 
-@{ 
-    ViewData["Title"] = "kustuta osakond";
-}
-@if (ViewBag.Delete == "Delete") {
-<h2>@Html.DisplayFor(ModelItem => Model.Name)</h2>
-<p>
-    <h3>Kustuta osakond:</h3>
-</p>
-<div>
-    <hr/>
-    <dl class="row">
-        <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.Name)</dt>
-        <dt class="col-sm-2">@Html.DisplayFor(Model => Model.Name)</dt>
-        <dt class="col-sm-2">@Html.DisplayFor(Model => Model.DepartmentID)</dt>
-        <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.DepartmentID)</dt>
-        <dt class="col-sm-2">@Html.DisplayFor(Model => Model.InstructorID)</dt>
-        <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.InstructorID)</dt>
-        <dt class="col-sm-2">@Html.DisplayFor(Model => Model.Budget)</dt>
-        <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.Budget)</dt>
-        <dt class="col-sm-2">@Html.DisplayFor(Model => Model.StartDate)</dt>
-        <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.StartDate)</dt>
-        <dt class="col-sm-2">@Html.DisplayFor(Model => Model.Adminstrator)</dt>
-        <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.Adminstrator)</dt>
-        <dt class="col-sm-2">@Html.DisplayFor(Model => Model.EndDate)</dt>
-        <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.EndDate)</dt>
-        <dt class="col-sm-2">@Html.DisplayFor(Model => Model.WaterStations)</dt>
-        <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.WaterStations)</dt>
-        <dt class="col-sm-2">@Html.DisplayFor(Model => Model.SteamAccountName)</dt>
-        <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.SteamAccountName)</dt>
+<body>
+
+	@{
+		ViewData["Title"] = "Kustuta Osakond";
+	}
+	<h2>@Html.DisplayFor(modelItem => Model.Name)</h2>
+
+	<div>
 
 
 
-    </dl>
+		@if (ViewBag.Vaatetüüp == "Delete")
+		{
+			<p>
+				<h3>Kustuta osakond:</h3>
+			</p>
 
-    @if(ViewBag.viewtype == "Delete")
-    {
-        <form asp-action="Delete">
-            <input type="hidden" asp-for="DepartmentID" />
-            <input type="hidden" asp-for="RowVersion" />
-            <input type="submit" value="Kustuta" class="btn btn-danger" /> | <a asp-action="Index">Tühista</a>
-        </form>
-    }
-    else if(ViewBag.viewtype =="Details")
-    {
-        <hl>Vaata Osakonda</hl>
-        <div>
-	        <hr />
-             <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.Name)</dt>
-            <dt class="col-sm-2">@Html.DisplayFor(Model => Model.Name)</dt>
-            <dt class="col-sm-2">@Html.DisplayFor(Model => Model.DepartmentID)</dt>
-            <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.DepartmentID)</dt>
-            <dt class="col-sm-2">@Html.DisplayFor(Model => Model.InstructorID)</dt>
-            <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.InstructorID)</dt>
-            <dt class="col-sm-2">@Html.DisplayFor(Model => Model.Budget)</dt>
-            <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.Budget)</dt>
-            <dt class="col-sm-2">@Html.DisplayFor(Model => Model.StartDate)</dt>
-            <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.StartDate)</dt>
-            <dt class="col-sm-2">@Html.DisplayFor(Model => Model.Adminstrator)</dt>
-            <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.Adminstrator)</dt>
-            <dt class="col-sm-2">@Html.DisplayFor(Model => Model.EndDate)</dt>
-            <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.EndDate)</dt>
-            <dt class="col-sm-2">@Html.DisplayFor(Model => Model.WaterStations)</dt>
-            <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.WaterStations)</dt>
-            <dt class="col-sm-2">@Html.DisplayFor(Model => Model.SteamAccountName)</dt>
-            <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.SteamAccountName)</dt>
+			<h4>Olete kindel, et soovite kustutada selle osakonna?</h4>
+			<hr />
+			<dl class="row">
+				<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.Name)</dt>
+				<dt class="col-sm-2">@Html.DisplayFor(Model => Model.Name)</dt>
+				<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.DepartmentID)</dt>
+				<dt class="col-sm-2">@Html.DisplayFor(Model => Model.DepartmentID)</dt>
+				<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.InstructorID)</dt>
+				<dt class="col-sm-2">@Html.DisplayFor(Model => Model.InstructorID)</dt>
+				<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.Budget)</dt>
+				<dt class="col-sm-2">@Html.DisplayFor(Model => Model.Budget)</dt>
+				<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.StartDate)</dt>
+				<dt class="col-sm-2">@Html.DisplayFor(Model => Model.StartDate)</dt>
+				<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.EndDate)</dt>
+				<dt class="col-sm-2">@Html.DisplayFor(Model => Model.EndDate)</dt>
+				<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.WaterStations)</dt>
+				<dt class="col-sm-2">@Html.DisplayFor(Model => Model.WaterStations)</dt>
+				<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.SteamAccountName)</dt>
+				<dt class="col-sm-2">@Html.DisplayFor(Model => Model.SteamAccountName)</dt>
+			</dl>
+			<form asp-action="Delete">
+				<input type="hidden" asp-for="DepartmentID" />
+				<input type="hidden" asp-for="RowVersion" />
+				<input type="submit" value="Kustuta" class="btn btn-danger" /> |
+				<a asp-action="Index">Tagasi Osakondade nimekirja</a>
+			</form>
+		}
+		else if (ViewBag.Vaatetüüp == "Details")
+		{
+			<p>
+				<h3>Vaata osakonda:</h3>
+			</p>
+			<dl class="row">
+				<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.Name)</dt>
+				<dt class="col-sm-2">@Html.DisplayFor(Model => Model.Name)</dt>
+				<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.DepartmentID)</dt>
+				<dt class="col-sm-2">@Html.DisplayFor(Model => Model.DepartmentID)</dt>
+				<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.InstructorID)</dt>
+				<dt class="col-sm-2">@Html.DisplayFor(Model => Model.InstructorID)</dt>
+				<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.Budget)</dt>
+				<dt class="col-sm-2">@Html.DisplayFor(Model => Model.Budget)</dt>
+				<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.StartDate)</dt>
+				<dt class="col-sm-2">@Html.DisplayFor(Model => Model.StartDate)</dt>
+				<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.EndDate)</dt>
+				<dt class="col-sm-2">@Html.DisplayFor(Model => Model.EndDate)</dt>
+				<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.WaterStations)</dt>
+				<dt class="col-sm-2">@Html.DisplayFor(Model => Model.WaterStations)</dt>
+				<dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.SteamAccountName)</dt>
+				<dt class="col-sm-2">@Html.DisplayFor(Model => Model.SteamAccountName)</dt>
+			</dl>
+
+		}
 
 
-            <form>
-	            <a asp-action="Index">Tagasi Osakondade Loetellu</a>
-            </form>
 
 
-        </div>
-    }
+	</div>
 
-</div>
+
+
+</body>

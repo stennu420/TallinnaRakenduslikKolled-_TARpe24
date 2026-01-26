@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.Identity.Client;
+using System.Reflection.Metadata;
 
 namespace TallinnaRakenduslikKolledz.Models
 {

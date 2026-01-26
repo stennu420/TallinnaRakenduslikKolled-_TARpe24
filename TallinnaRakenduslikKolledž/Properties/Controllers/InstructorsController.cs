@@ -1,17 +1,18 @@
-﻿using System.Reflection;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+using Microsoft.IdentityModel.Tokens;
 using TallinnaRakenduslikKolledz.Data;
 using TallinnaRakenduslikKolledz.Models;
 
 namespace TallinnaRakenduslikKolledz.Controllers
 {
-        public class InstructorsController : Controller
+    public class InstructorsController : Controller
     {
-        private readonly SchoolContext _context;
+        private readonly SchoolContext _Context;
         public InstructorsController(SchoolContext context)
         {
-            _context = context;
+            _Context = context;
         }
         public async Task<IActionResult> Index( int? id, int? courseId)
         {
@@ -44,7 +45,7 @@ namespace TallinnaRakenduslikKolledz.Controllers
                 {
                     var courseToAdd = new CourseAssignment
                     {
-                        InstructorID = instructor.ID,
+                        InstructorId = instructor.Id,
                         CourseID = course
                     };
                     instructor.CourseAssignments.Add(courseToAdd);
@@ -69,7 +70,7 @@ namespace TallinnaRakenduslikKolledz.Controllers
                 return NotFound();
             }
             var deletableInstructor = await _context.Instructors
-                .FirstOrDefaultAsync(s => s.ID == id);
+                .FirstOrDefaultAsync(s => s.Id == id);
             if (deletableInstructor == null)
             {
                 return NotFound();
@@ -82,7 +83,7 @@ namespace TallinnaRakenduslikKolledz.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             Instructor deletableInstructor = await _context.Instructors
-                .SingleAsync(i => i.ID == id);
+                .SingleAsync(i => i.Id == id);
             _context.Instructors.Remove(deletableInstructor);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -90,7 +91,7 @@ namespace TallinnaRakenduslikKolledz.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
-            var instructor = await _context.Instructors.FirstOrDefaultAsync(i => i.ID == id);
+            var instructor = await _context.Instructors.FirstOrDefaultAsync(i => i.Id == id);
             return View(instructor);
         }
         [HttpGet]
@@ -122,9 +123,9 @@ namespace TallinnaRakenduslikKolledz.Controllers
             {
                 vm.Add(new AssignedCourseData
                 {
-                    CourseID = course.CourseID,
+                    CourseID = course.CourseId,
                     Title = course.Title,
-                    Assigned = instructorCourses.Contains(course.CourseID)
+                    Assigned = instructorCourses.Contains(course.CourseId)
                 });
             }
             ViewData["Courses"] = vm;

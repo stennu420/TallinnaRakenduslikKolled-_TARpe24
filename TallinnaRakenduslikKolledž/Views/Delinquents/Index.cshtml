@@ -1,66 +1,44 @@
 ﻿@model IEnumerable<TallinnaRakenduslikKolledz.Models.DelinquentsBase>
+  
 @{
-	ViewData["Title"] = "Kuri Teod";
-}
-<h1>Loend </h1>
-<p>
-	<a asp-action="Create">Sisesta Kurjategija</a>
-</p>
-<table class="table">
-	<thead>
-		<tr>
+  ViewData["Title"] = "Korrarikkujad";
+   }
+    <h2>Korrarikkujad</h2>
+    <p>
+        <a asp-action="Create">Lisa õpilane nimekirja</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(Model => Model.ID)</th>
+                <th>@Html.DisplayNameFor(Model => Model.Name)</th>
+                <th>@Html.DisplayNameFor(Model => Model.EventDate)</th>
+                <th>@Html.DisplayNameFor(Model => Model.PunishmentType)</th>
+                <th>@Html.DisplayNameFor(Model => Model.PunishmentLength)</th>
+                <th>Tooriistad</th>
+            </tr>
+        </thead>
 
-			<th>
-				@Html.DisplayNameFor(Model => Model.FirstName)
-			</th>
+        <tbody>
+            @foreach (var delinquents in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => delinquents.ID)</td>
 
-			<th>
-				@Html.DisplayNameFor(Model => Model.LastName)
-			</th>
-			<th>
-				@Html.DisplayNameFor(Model => Model.isTeacherOrStudent)
-			</th>
+                <td>@Html.DisplayFor(modelItem => delinquents.Name)</td>
 
-			<th>
-				@Html.DisplayNameFor(Model => Model.ViolationDescription)
-			</th>
-			<th>
-				@Html.DisplayNameFor(Model => Model.Violation)
-			</th>
-			<th>
-				Tööriistad
-			</th>
-		</tr>
+                <td>@Html.DisplayFor(modelItem => delinquents.EventDate)</td>
 
+                <td>@Html.DisplayFor(modelItem => delinquents.PunishmentType)</td>
 
-	</thead>
-	<tbody>
+                <td>@Html.DisplayFor(modelItem => delinquents.PunishmentLength)</td>
 
-		@foreach (var delinquents in Model)
-		{
-			<tr>
-				<td>
-					@Html.DisplayFor(modelItem => delinquents.LastName)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => delinquents.FirstName)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => delinquents.isTeacherOrStudent)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => delinquents.ViolationDescription)
-				</td>
-				<td>
-					<a asp-action="Edit" asp-route-id="@delinquents.DelinquentsID">Muuda</a>
-					<a asp-action="Details" asp-route-id="@delinquents.DelinquentsID">Vaata</a>
-					<a asp-action="Delete" asp-route-id="@delinquents.DelinquentsID">Kustuta</a>
-				</td>
-			</tr>
-		}
-	</tbody>
-
-
-</table>
- 
-
+                <td>
+                    <a asp-action="Edit" asp-route-id="@delinquents.ID" class="btn btn-success">Muuda</a>
+                    <a asp-action="Details" asp-route-id="@delinquents.ID" class="btn btn-danger">Detailid</a>
+                    <a asp-action="Delete" asp-route-id="@delinquents.ID" class="btn btn-dark">Kustuta</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>

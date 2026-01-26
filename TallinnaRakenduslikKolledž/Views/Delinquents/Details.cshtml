@@ -1,0 +1,23 @@
+﻿@model TallinnaRakenduslikKolledz.Models.DelinquentsBase
+
+@{
+    ViewData["Title"] = "Korrarikkuja andmed";
+}
+<h1>Korrarikkuja andmed</h1>
+<h2>@Html.DisplayFor(ModelItem => Model.Name)</h2>
+<div>
+    <h4>Õpilane</h4>
+    <hr />
+
+    <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.Name)</dt>
+    <td class="col-sm-2">@Html.DisplayFor(Model => Model.Name)</td>
+    <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.EventDate)</dt>
+    <td class="col-sm-2">@Html.DisplayFor(Model => Model.EventDate)</td>
+    <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.PunishmentType)</dt>
+    <td class="col-sm-2">@Html.DisplayFor(Model => Model.PunishmentType)</td>
+    <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.PunishmentLength)</dt>
+    <td class="col-sm-2">@Html.DisplayFor(Model => Model.PunishmentLength)</td>
+    <dt class="col-sm-2">@Html.DisplayNameFor(Model => Model.Description)</dt>
+    <td class="col-sm-2">@Html.DisplayFor(Model => Model.Description)</td>
+
+</div>
