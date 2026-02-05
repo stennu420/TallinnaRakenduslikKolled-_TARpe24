@@ -23,85 +23,91 @@ namespace TallinnaRakenduslikKolledz.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewData["viewtype"] = "Create";
+            ViewData["creation"] = true;
             ViewData["InstructorID"] = new SelectList(_context.Instructors, "Id", "FullName");
-            ViewData["CourseStatus"] = new SelectList(_context.Instructors, "id", "LastName","InstructorName");  
-             return View();
+            /*ViewData["StudentId"] = new SelectList(_context.Students, "Id", "LastName", "FirstName");*/
+            return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Budget,StartDate,RowVersion,InstructorID,SteamAccountName,WaterStations,EndDate")]Department department)
+        public async Task<IActionResult> Create([Bind("Name,Budget,StartDate,RowVersion,InstructorId,Staplers,WastedHours")] Department department)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                _context.Departments.Add(department);
+                _context.Add(department);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-
-            ViewData["InstructorID"] = new SelectList(_context.Instructors, "id", "FullName", department.InstructorID);
-           // ViewData["CourseStatus"] = new SelectList(_context.Instructors, "id", department.CurrentStatus.ToString(), department.StudentID);
-           return View(department);
+            ViewData["InstructorID"] = new SelectList(_context.Instructors, "Id", "FullName", department.InstructorID);
+            /*ViewData["CourseStatus"] = new SelectList(_context.Instructors,"Id",department.CurrentStatus.ToString)*/
+            return View(department);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            ViewData["creation"] = false;
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var department = await _context.Departments.FirstOrDefaultAsync(d => d.DepartmentID == id);
+            if (department == null)
+            {
+                return NotFound();
+            }
+            /*_context.Departments.Update(department);        */
+            return View("Create", department);
+        }
+        [HttpPost, ActionName("Edit")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditConfirmed([Bind("DepartmentID,Name,Budget,StartDate,RowVersion,InstructorId,Staplers,WastedHours")] Department department)
+        {
+            _context.Departments.Update(department);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
         [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
-            ViewData["viewtype"] = "Delete";
-            if(id == null)
+            ViewData["deletion"] = true;
+            if (id == null)
             {
                 return NotFound();
             }
-            var department = await _context.Departments
-                .Include(d => d.Adminstrator)
-                .FirstOrDefaultAsync(d => d.DepartmentID == id);
-            if(department == null)
+            var department = await _context.Departments.FirstOrDefaultAsync(d => d.DepartmentID == id);
+            if (department == null)
             {
                 return NotFound();
             }
             return View(department);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(Department department)
         {
-            if(await _context.Departments.AnyAsync(m => m.DepartmentID == department.DepartmentID))
+            if (await _context.Departments.AnyAsync(m => m.DepartmentID == department.DepartmentID))
             {
                 _context.Departments.Remove(department);
                 await _context.SaveChangesAsync();
             }
             return RedirectToAction("Index");
         }
+
         [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
-            ViewData["viewtype"] = "Details";
-            ViewData["Edit"] = new SelectList(_context.Departments, "id", "FullName");
-            var department = await _context.Departments
-                            .Include(d => d.Adminstrator)
-                            .FirstOrDefaultAsync(d => d.DepartmentID == id);
-            return View("Delete", department);
-        }
-        [HttpGet]
-        public async Task<IActionResult> Edit(int id)
-        {
-            ViewData["viewtype"] = "Edit";
-            var department = await _context.Departments.FindAsync(id);
-            return View("Create", department);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit([Bind("DepartmentID,Name,Budget,StartDate,RowVersion,InstructorID,SteamAccountName,WaterStations,EndDate")]Department department)
-        {
-            if(ModelState.IsValid)
+            ViewData["deletion"] = false;
+            if (id == null)
             {
-                _context.Departments.Update(department);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return NotFound();
             }
-
-            ViewData["InstructorID"] = new SelectList(_context.Instructors, "id", "FullName", department.InstructorID);
-           // ViewData["CourseStatus"] = new SelectList(_context.Instructors, "id", department.CurrentStatus.ToString(), department.StudentID);
-           return View("Create",department);
+            var department = await _context.Departments.FirstOrDefaultAsync(d => d.DepartmentID == id);
+            if (department == null)
+            {
+                return NotFound();
+            }
+            return View("Delete", department);
         }
         //[HttpPost, ActionName("Edit")]
         //[ValidateAntiForgeryToken]
