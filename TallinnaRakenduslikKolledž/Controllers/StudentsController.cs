@@ -6,7 +6,7 @@ using TallinnaRakenduslikKolledz.Models;
 
 namespace TallinnaRakenduslikKolledz.Controllers
 {
-       public class StudentsController : Controller
+    public class StudentsController : Controller
     {
         private readonly SchoolContext _context;
         public StudentsController(SchoolContext context)
@@ -17,6 +17,7 @@ namespace TallinnaRakenduslikKolledz.Controllers
         {
             return View(await _context.Students.ToListAsync());
         }
+
         [HttpGet]
         public IActionResult Create()
         {
@@ -70,26 +71,68 @@ namespace TallinnaRakenduslikKolledz.Controllers
             return RedirectToAction("Index");
         }
         [HttpGet]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int? Id)
         {
-            var student = await _context.Students.FindAsync(id);
+            if (Id == null)
+            {
+                return NotFound();
+            }
+            var student = await _context.Students.FirstOrDefaultAsync(m => m.Id == Id);
+            if (student == null)
+            {
+                return NotFound();
+            }
             return View(student);
         }
         [HttpGet]
-        public async Task<IActionResult> Edit (int id)
+        public async Task<IActionResult> Edit(int? Id)
         {
-            var student = await _context.Students.FindAsync(id);
+            if (Id == null)
+            {
+                return NotFound();
+            }
+            var student = await _context.Students.FirstOrDefaultAsync(m => m.Id == Id);
+            if (student == null)
+            {
+                return NotFound();
+            }
+            _context.Students.Update(student);
             return View(student);
         }
         [HttpPost, ActionName("Edit")]
-        public async Task<IActionResult> Edit([Bind("Id,LastName, FirstName,  EnrollmentDate, GradesPerAverage")] Student student)
-
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditConfirmed([Bind("Id,LastName,FirstName,EnrollmentDate,Commendments")] Student student)
         {
+            _context.Students.Update(student);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Clone(int? Id)
+        {
+            if (Id == null)
+            {
+                return NotFound();
+            }
+            var student = await _context.Students.FirstOrDefaultAsync(m => m.Id == Id);
+            if (student == null)
+            {
+                return NotFound();
+            }
+            return View(student);
+        }
+        [HttpPost, ActionName("Clone")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CloneConfirmed(int? Id)
+        {
+            var student = await _context.Students.FirstOrDefaultAsync(m => m.Id == Id);
+            //ModelState.Remove("Id");
             if (ModelState.IsValid)
             {
-                _context.Students.Update(student);
+                _context.Students.Add(student);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
+                // return RedirectToAction(nameof(Index))
             }
             return View(student);
         }
